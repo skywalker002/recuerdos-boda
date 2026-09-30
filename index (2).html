@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boda Lucio Alberto & Guadalupe Itzel · Invitación & Recuerdos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream-petal: #FAF5F0;
+      --bg-card-white: #FFFFFF;
+      --color-marsala: #7B0F2B;
+      --color-burgundy-deep: #4E0B19;
+      --color-olive-sage: #5A6746;
+      --color-olive-light: #73845B;
+      --color-dusty-rose: #D1A397;
+      --color-dusty-light: #E8CAC1;
+      --color-text-dark: #321922;
+      --color-text-muted: #6B4E56;
+      --color-card-border: #ECDCD7;
+    }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-cream-petal);
+      color: var(--color-text-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .serif-title {
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.08em;
+    }
+    .serif-body {
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .floral-gradient-text {
+      background: linear-gradient(135deg, #4E0B19 20%, #7B0F2B 65%, #A2304C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .floral-card {
+      background: var(--bg-card-white);
+      border: 1px solid var(--color-card-border);
+      box-shadow: 0 10px 25px -5px rgba(123, 15, 43, 0.06), 0 8px 10px -6px rgba(123, 15, 43, 0.04);
+    }
+    .card-hover {
+      transition: all 0.25s ease;
+    }
+    .card-hover:hover {
+      border-color: var(--color-dusty-rose);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -8px rgba(123, 15, 43, 0.12);
+    }
+    .pulse-record {
+      animation: pulseRecord 1.4s infinite;
+    }
+    @keyframes pulseRecord {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(1.15); }
+    }
+    .wax-seal {
+      box-shadow: 0 10px 20px -3px rgba(78, 11, 25, 0.35), inset 0 -3px 6px rgba(0,0,0,0.25);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #FAF5F0;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #D1A397;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="flex flex-col items-center pb-24 sm:pb-12 antialiased selection:bg-[#7B0F2B]/15 selection:text-[#4E0B19]">
+
+  <!-- ============================================== -->
+  <!-- SOBRE VIRTUAL DE BIENVENIDA (Pantalla Inicial) -->
+  <!-- ============================================== -->
+  <div id="envelope-overlay" class="fixed inset-0 z-50 flex items-center justify-center bg-[#FAF5F0] p-4 transition-all duration-700">
+    <div class="relative w-full max-w-sm sm:max-w-md bg-white border border-[#ECDCD7] rounded-3xl p-8 sm:p-10 shadow-2xl flex flex-col items-center text-center">
+      <div class="w-16 h-16 rounded-full bg-[#FAF5F0] border-2 border-[#D1A397] flex items-center justify-center text-[#7B0F2B] mb-5 shadow-inner">
+        <svg class="w-8 h-8 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="9" cy="12" r="5" stroke-width="1.6"></circle>
+          <circle cx="15" cy="12" r="5" stroke-width="1.6"></circle>
+        </svg>
+      </div>
+
+      <span class="text-[11px] uppercase tracking-[0.25em] text-[#7B0F2B] font-semibold mb-2">Nuestra Boda</span>
+      <h2 class="serif-title text-2xl sm:text-3xl font-bold text-[#4E0B19] leading-tight mb-2">
+        Lucio Alberto<br>&amp; Guadalupe Itzel
+      </h2>
+      <p class="text-xs text-[#6B4E56] mb-8 font-medium">27 de Noviembre de 2026 · Jalpa de Méndez, Tabasco</p>
+
+      <!-- Botón de apertura -->
+      <button onclick="openInvitation()" class="wax-seal group w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-[#4E0B19] via-[#7B0F2B] to-[#4E0B19] text-[#FAF5F0] serif-title text-sm font-bold tracking-widest uppercase hover:brightness-110 active:scale-95 transition-all flex items-center justify-center gap-3">
+        <span>Abrir Invitación</span>
+        <svg class="w-4 h-4 text-[#D1A397] group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+        </svg>
+      </button>
+
+      <span class="text-[11px] text-[#8C656F] mt-4 flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5 text-[#5A6746]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+        </svg>
+        <span>Nuestra canción sonará al abrir</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Elemento de audio nativo para musica.mp3 -->
+  <audio id="wedding-audio" src="musica.mp3" preload="auto" loop></audio>
+
+  <!-- Botón Flotante de Música -->
+  <button id="music-fab" onclick="toggleMusic()" class="fixed top-4 right-4 z-40 w-10 h-10 rounded-full bg-white/95 border border-[#ECDCD7] shadow-md flex items-center justify-center text-[#7B0F2B] hover:bg-[#FAF5F0] transition">
+    <svg id="music-icon-playing" class="w-5 h-5 hidden animate-spin" style="animation-duration: 4s;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+    </svg>
+    <svg id="music-icon-muted" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+    </svg>
+  </button>
+
+  <!-- ============================================== -->
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR                   -->
+  <!-- ============================================== -->
+  <nav class="w-full sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#ECDCD7] px-4 py-3 shadow-xs">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-[#7B0F2B] border border-[#D1A397] flex items-center justify-center text-white shadow-xs">
+          <svg class="w-4 h-4 text-[#F4EAE4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.18L12 21z"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="serif-title text-xs sm:text-sm font-bold tracking-wider text-[#4E0B19] leading-none">Lucio &amp; Guadalupe Itzel</h1>
+          <span class="text-[10px] text-[#6B4E56] font-medium">27 de Noviembre de 2026</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="openModal('qrModal')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ECDCD7] bg-[#FAF5F0] text-xs font-semibold text-[#4E0B19] hover:bg-[#F3E8E3] transition">
+          <svg class="w-3.5 h-3.5 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+          <span class="hidden sm:inline">Código QR</span>
+        </button>
+        <button onclick="openModal('whatsappTemplateModal')" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#5A6746] text-white text-xs font-semibold hover:bg-[#495438] transition shadow-xs">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.301-.15-1.78-.879-2.056-.98-.276-.101-.477-.15-.678.15-.2.301-.777.98-.953 1.18-.176.2-.352.226-.653.076-.301-.15-1.272-.469-2.423-1.496-.896-.798-1.501-1.784-1.677-2.085-.176-.301-.019-.464.132-.614.136-.135.301-.351.452-.527.15-.175.2-.299.301-.499.101-.2.05-.376-.025-.526-.075-.15-.678-1.635-.929-2.239-.245-.589-.494-.509-.679-.519-.176-.01-.377-.01-.578-.01-.201 0-.527.075-.803.376-.276.301-1.054 1.03-1.054 2.512 0 1.482 1.079 2.912 1.23 3.113.15.201 2.124 3.243 5.146 4.549.719.311 1.28.497 1.718.636.723.23 1.381.198 1.901.12.58-.088 1.78-.727 2.031-1.429.251-.702.251-1.304.176-1.429-.075-.125-.276-.2-.577-.35zM12.042 21.84a9.78 9.78 0 01-4.992-1.364l-.358-.213-3.712.973.99-3.618-.233-.371A9.8 9.8 0 012.25 12.04c0-5.414 4.406-9.82 9.82-9.82 2.624 0 5.09 1.023 6.947 2.88 1.856 1.857 2.879 4.323 2.879 6.947 0 5.414-4.434 9.793-9.854 9.793z"/></svg>
+          <span class="hidden sm:inline">WhatsApp</span>
+        </button>
+        <button onclick="openModal('noviosAuthModal')" id="btn-novios-lock" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#ECDCD7] bg-[#FAF5F0] text-xs font-semibold text-[#4E0B19] hover:bg-[#F3E8E3] transition">
+          <svg class="w-3.5 h-3.5 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          <span id="novios-status-text" class="hidden sm:inline">Modo Novios</span>
+        </button>
+        <button onclick="scrollToSection('form-section')" class="px-3.5 py-1.5 rounded-lg bg-[#7B0F2B] hover:bg-[#5C0A20] text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-[#F4EAE4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+          <span>Dedicatoria</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================== -->
+  <!-- PORTADA DE LA INVITACIÓN                       -->
+  <!-- ============================================== -->
+  <header class="w-full max-w-4xl px-4 pt-10 pb-6 text-center flex flex-col items-center">
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#F3E8E3] text-[#7B0F2B] border border-[#E8CAC1] mb-4">
+      <span>Con la bendición de Dios y de nuestras familias</span>
+    </div>
+    
+    <h2 class="serif-title text-3xl sm:text-5xl font-bold floral-gradient-text tracking-wide mb-1">
+      Lucio Alberto
+    </h2>
+    <span class="serif-body italic text-base sm:text-lg text-[#6B4E56] -mt-1">De la Cruz Rodríguez</span>
+
+    <span class="serif-body text-3xl sm:text-4xl text-[#D1A397] my-1 font-light">&amp;</span>
+
+    <h2 class="serif-title text-3xl sm:text-5xl font-bold floral-gradient-text tracking-wide mb-1">
+      Guadalupe Itzel
+    </h2>
+    <span class="serif-body italic text-base sm:text-lg text-[#6B4E56] -mt-1 mb-4">De la Cruz Matías</span>
+
+    <p class="serif-body italic text-lg sm:text-xl text-[#321922] max-w-2xl leading-relaxed mt-2 px-2">
+      “Dos caminos que se encuentran, dos corazones que eligen caminar juntos y una historia de amor que hoy comienza una nueva etapa.”
+    </p>
+
+    <!-- Cuenta regresiva en vivo -->
+    <div class="mt-8 w-full max-w-md floral-card rounded-2xl p-4 sm:p-5 text-center">
+      <span class="text-[11px] uppercase tracking-widest text-[#7B0F2B] font-semibold">Faltan para nuestro gran día</span>
+      <div class="grid grid-cols-4 gap-2 mt-3 text-center">
+        <div class="bg-[#FAF5F0] p-2.5 rounded-xl border border-[#ECDCD7]">
+          <span id="cd-days" class="serif-title block text-xl sm:text-2xl font-bold text-[#4E0B19]">00</span>
+          <span class="text-[10px] text-[#6B4E56] uppercase tracking-wider font-medium">Días</span>
+        </div>
+        <div class="bg-[#FAF5F0] p-2.5 rounded-xl border border-[#ECDCD7]">
+          <span id="cd-hours" class="serif-title block text-xl sm:text-2xl font-bold text-[#4E0B19]">00</span>
+          <span class="text-[10px] text-[#6B4E56] uppercase tracking-wider font-medium">Horas</span>
+        </div>
+        <div class="bg-[#FAF5F0] p-2.5 rounded-xl border border-[#ECDCD7]">
+          <span id="cd-mins" class="serif-title block text-xl sm:text-2xl font-bold text-[#4E0B19]">00</span>
+          <span class="text-[10px] text-[#6B4E56] uppercase tracking-wider font-medium">Min</span>
+        </div>
+        <div class="bg-[#FAF5F0] p-2.5 rounded-xl border border-[#ECDCD7]">
+          <span id="cd-secs" class="serif-title block text-xl sm:text-2xl font-bold text-[#4E0B19]">00</span>
+          <span class="text-[10px] text-[#6B4E56] uppercase tracking-wider font-medium">Seg</span>
+        </div>
+      </div>
+      <span class="serif-title block text-xs text-[#5A6746] font-bold tracking-widest mt-3">27 · NOVIEMBRE · 2026</span>
+    </div>
+  </header>
+
+  <!-- ============================================== -->
+  <!-- DÓNDE Y CUÁNDO (UBICACIONES CON GPS)          -->
+  <!-- ============================================== -->
+  <section class="w-full max-w-4xl px-4 py-6">
+    <div class="text-center mb-6">
+      <span class="text-[11px] uppercase tracking-widest text-[#7B0F2B] font-semibold">Ubicaciones del Evento</span>
+      <h3 class="serif-title text-2xl font-bold text-[#4E0B19]">Dónde y Cuándo</h3>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <!-- Ceremonia Religiosa -->
+      <div class="floral-card rounded-2xl p-6 text-center flex flex-col justify-between items-center card-hover">
+        <div class="w-12 h-12 rounded-full bg-[#FAF5F0] border border-[#ECDCD7] flex items-center justify-center text-[#7B0F2B] mb-3 shadow-2xs">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 2v4m-3-2h6M4 22h16M5 22V10l7-5 7 5v12M9 13v9m6-9v9"></path>
+          </svg>
+        </div>
+        <span class="text-[10px] uppercase font-bold tracking-widest text-[#7B0F2B]">Ceremonia Religiosa</span>
+        <h4 class="serif-title text-lg font-bold text-[#4E0B19] mt-1">Parroquia San Francisco de Asís</h4>
+        <span class="serif-title text-base font-bold text-[#5A6746] my-1">7:00 P. M.</span>
+        <p class="text-xs text-[#6B4E56] leading-relaxed mb-4">
+          Plaza Hidalgo s/n, Centro<br>Jalpa de Méndez, Tabasco
+        </p>
+        <a href="https://maps.google.com/?cid=4523980134989768181&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" rel="noopener noreferrer"
+           class="w-full py-2.5 px-4 rounded-xl bg-[#FAF5F0] hover:bg-[#F3E8E3] border border-[#ECDCD7] text-[#4E0B19] text-xs font-bold transition flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <circle cx="12" cy="11" r="3" stroke-width="2"></circle>
+          </svg>
+          <span>Abrir en Google Maps</span>
+        </a>
+      </div>
+
+      <!-- Recepción y Cena -->
+      <div class="floral-card rounded-2xl p-6 text-center flex flex-col justify-between items-center card-hover">
+        <div class="w-12 h-12 rounded-full bg-[#FAF5F0] border border-[#CBD8BE] flex items-center justify-center text-[#5A6746] mb-3 shadow-2xs">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 21h18M4 18h16M6 18l1-10 5-3 5 3 1 10M10 21v-3h4v3"></path>
+          </svg>
+        </div>
+        <span class="text-[10px] uppercase font-bold tracking-widest text-[#5A6746]">Recepción &amp; Cena</span>
+        <h4 class="serif-title text-lg font-bold text-[#4E0B19] mt-1">Palapa Denifer</h4>
+        <span class="serif-title text-base font-bold text-[#5A6746] my-1">Al terminar la misa</span>
+        <p class="text-xs text-[#6B4E56] leading-relaxed mb-4">
+          Santuario 2.ª Sección<br>Jalpa de Méndez, Tabasco
+        </p>
+        <a href="https://maps.app.goo.gl/xw6zhzLGK4aPUUgJ6" target="_blank" rel="noopener noreferrer"
+           class="w-full py-2.5 px-4 rounded-xl bg-[#FAF5F0] hover:bg-[#F3E8E3] border border-[#CBD8BE] text-[#4E0B19] text-xs font-bold transition flex items-center justify-center gap-2">
+          <svg class="w-4 h-4 text-[#5A6746]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <circle cx="12" cy="11" r="3" stroke-width="2"></circle>
+          </svg>
+          <span>Abrir Ruta hacia la Palapa</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- CAJA DE BIENVENIDA AL LIBRO DE RECUERDOS       -->
+  <!-- ============================================== -->
+  <section class="w-full max-w-4xl px-4 my-2">
+    <div class="floral-card rounded-2xl p-5 text-center sm:text-left flex flex-col sm:flex-row items-center gap-4">
+      <div class="w-12 h-12 rounded-xl bg-[#FAF5F0] border border-[#E8CAC1] flex items-center justify-center text-[#7B0F2B] shrink-0 shadow-xs">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h4 class="serif-title text-xs sm:text-sm font-bold text-[#4E0B19]">¡Déjanos tus bendiciones antes del gran día!</h4>
+        <p class="text-xs text-[#6B4E56] mt-1 leading-relaxed">
+          Comparte una dedicatoria, una foto con nosotros o graba una <strong>nota de voz</strong> directamente con el micrófono de tu celular. ¡Tus palabras nos acompañarán en cada momento!
+        </p>
+      </div>
+      <button onclick="scrollToSection('form-section')" class="shrink-0 px-4 py-2.5 bg-[#7B0F2B] hover:bg-[#5C0A20] text-white text-xs font-bold rounded-xl transition shadow-xs flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+        <span>Escribir ahora</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================== -->
+  <!-- CONTENIDO CENTRAL: MURO Y FORMULARIO           -->
+  <!-- ============================================== -->
+  <main class="w-full max-w-6xl px-4 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start my-8">
+    
+    <!-- Columna Izquierda: Feed de Mensajes -->
+    <section class="lg:col-span-7 flex flex-col space-y-4" id="wall-section">
+      <div class="flex items-center justify-between">
+        <h3 class="serif-title text-base sm:text-lg font-bold text-[#4E0B19] flex items-center gap-2">
+          <svg class="w-5 h-5 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+          <span>Mensajes &amp; Recuerdos de Invitados</span>
+        </h3>
+        <span class="text-xs text-[#6B4E56]" id="filter-status-text">Mostrando todos</span>
+      </div>
+
+      <!-- Barra de Filtros -->
+      <div class="flex flex-wrap items-center gap-2 p-1.5 bg-white rounded-xl border border-[#ECDCD7] shadow-xs">
+        <button id="tab-all" onclick="filterFeed('all')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#7B0F2B] text-white transition flex items-center gap-1.5 shadow-xs">
+          <span>Todos</span>
+          <span id="count-all" class="text-[10px] px-1.5 py-0.5 rounded-full bg-white/20">0</span>
+        </button>
+        <button id="tab-ambos" onclick="filterFeed('con-ambos')" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-[#6B4E56] hover:bg-[#FAF5F0] hover:text-[#4E0B19] transition flex items-center gap-1.5">
+          <span>Para Ambos</span>
+          <span id="count-ambos" class="text-[10px] px-1.5 py-0.5 rounded-full bg-[#FAF5F0]">0</span>
+        </button>
+        <button id="tab-lucio" onclick="filterFeed('con-lucio')" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-[#6B4E56] hover:bg-[#FAF5F0] hover:text-[#4E0B19] transition flex items-center gap-1.5">
+          <span>Con Lucio</span>
+          <span id="count-lucio" class="text-[10px] px-1.5 py-0.5 rounded-full bg-[#FAF5F0]">0</span>
+        </button>
+        <button id="tab-itzel" onclick="filterFeed('con-itzel')" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-[#6B4E56] hover:bg-[#FAF5F0] hover:text-[#4E0B19] transition flex items-center gap-1.5">
+          <span>Con Itzel</span>
+          <span id="count-itzel" class="text-[10px] px-1.5 py-0.5 rounded-full bg-[#FAF5F0]">0</span>
+        </button>
+      </div>
+
+      <!-- Contenedor dinámico de dedicatorias -->
+      <div id="memories-container" class="space-y-4"></div>
+    </section>
+
+    <!-- Columna Derecha: Formulario para Dejar Mensajes -->
+    <section class="lg:col-span-5" id="form-section">
+      <div class="floral-card rounded-2xl p-6 shadow-md sticky top-20 border border-[#ECDCD7]">
+        <div class="text-center mb-5">
+          <div class="w-12 h-12 rounded-full bg-[#FAF5F0] border border-[#E8CAC1] flex items-center justify-center mx-auto mb-2 text-[#7B0F2B] shadow-xs">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M8 21h8m-4-7v7m-7-14h14a7 7 0 01-14 0z"></path></svg>
+          </div>
+          <h3 class="serif-title text-xl font-bold text-[#4E0B19]">Envíanos tus Buenos Deseos</h3>
+          <p class="text-xs text-[#6B4E56] mt-1 leading-relaxed">Comparte tus palabras, sube una foto especial o graba una nota de voz para Lucio o Guadalupe Itzel.</p>
+        </div>
+
+        <form id="memory-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-[#4E0B19] uppercase tracking-wider mb-1">
+              Tu Nombre o Familia *
+            </label>
+            <input type="text" id="guest-name" required placeholder="Ej. Tía Rosalba, Familia Pérez Cruz..."
+                   class="w-full bg-[#FAF5F0] border border-[#ECDCD7] rounded-xl px-3.5 py-2.5 text-sm text-[#321922] placeholder-[#8C656F]/60 focus:outline-none focus:border-[#7B0F2B] focus:bg-white transition">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-[#4E0B19] uppercase tracking-wider mb-1">
+              ¿Quién aparece o a quién va dirigido? *
+            </label>
+            <select id="relation-tag" class="w-full bg-[#FAF5F0] border border-[#ECDCD7] rounded-xl px-3.5 py-2.5 text-sm text-[#321922] focus:outline-none focus:border-[#7B0F2B] focus:bg-white transition">
+              <option value="con-ambos">Para Lucio &amp; Guadalupe Itzel (Ambos)</option>
+              <option value="con-lucio">Recuerdo con Lucio Alberto</option>
+              <option value="con-itzel">Recuerdo con Guadalupe Itzel</option>
+            </select>
+          </div>
+
+          <!-- Grabación de Nota de Voz -->
+          <div class="bg-[#FAF5F0] p-3.5 rounded-xl border border-[#ECDCD7]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold text-[#4E0B19] uppercase tracking-wider flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                <span>Mensaje de Voz (Opcional)</span>
+              </span>
+              <span id="voice-timer" class="text-[11px] font-mono text-[#7B0F2B] font-bold">00:00</span>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button type="button" id="record-btn" onclick="toggleVoiceRecording()"
+                      class="flex-1 py-2.5 px-3 rounded-xl border border-[#E8CAC1] bg-white hover:bg-[#F3E8E3] text-[#7B0F2B] text-xs font-semibold flex items-center justify-center gap-2 transition shadow-2xs">
+                <span id="record-indicator" class="w-2.5 h-2.5 rounded-full bg-[#7B0F2B]"></span>
+                <span id="record-text">Grabar nota de voz</span>
+              </button>
+
+              <button type="button" id="discard-audio-btn" onclick="discardRecordedAudio()" class="hidden px-3 py-2.5 rounded-xl bg-white hover:bg-[#F3E8E3] text-[#7B0F2B] border border-[#ECDCD7] text-xs transition" title="Eliminar grabación">
+                <svg class="w-4 h-4 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            </div>
+
+            <audio id="audio-preview" controls class="w-full mt-2 hidden rounded-lg h-9"></audio>
+          </div>
+
+          <!-- Mensaje Escrito -->
+          <div>
+            <label class="block text-xs font-semibold text-[#4E0B19] uppercase tracking-wider mb-1">
+              Dedicatoria o Mensaje Escrito
+            </label>
+            <textarea id="guest-message" rows="3" placeholder="Escribe tu bendición, anécdota o felicitación para esta nueva etapa..."
+                      class="w-full bg-[#FAF5F0] border border-[#ECDCD7] rounded-xl p-3 text-sm text-[#321922] placeholder-[#8C656F]/60 focus:outline-none focus:border-[#7B0F2B] focus:bg-white transition custom-scroll"></textarea>
+          </div>
+
+          <!-- Foto del Recuerdo -->
+          <div>
+            <label class="block text-xs font-semibold text-[#4E0B19] uppercase tracking-wider mb-1">
+              Foto del Recuerdo (Opcional)
+            </label>
+            <div class="relative border-2 border-dashed border-[#ECDCD7] hover:border-[#7B0F2B] rounded-xl p-4 text-center cursor-pointer transition bg-[#FAF5F0]/60 group"
+                 onclick="document.getElementById('photo-input').click()">
+              <input type="file" id="photo-input" accept="image/*" class="hidden" onchange="previewImage(event)">
+              
+              <div id="upload-placeholder" class="flex flex-col items-center">
+                <div class="w-9 h-9 rounded-full bg-white border border-[#E8CAC1] flex items-center justify-center text-[#7B0F2B] mb-1 group-hover:scale-105 transition transform shadow-2xs">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><circle cx="12" cy="13" r="3" stroke-width="1.8"></circle></svg>
+                </div>
+                <span class="text-xs text-[#4E0B19] font-medium">Toca para elegir una foto</span>
+                <span class="text-[10px] text-[#6B4E56] mt-0.5">JPG, PNG o foto tomada con tu cámara</span>
+              </div>
+
+              <div id="upload-preview" class="hidden relative">
+                <img id="preview-img" src="" alt="Vista previa" class="max-h-48 mx-auto rounded-lg object-cover border border-[#E8CAC1]">
+                <button type="button" onclick="removeImage(event)" class="absolute top-1 right-1 bg-[#7B0F2B] text-white rounded-full p-1 text-xs hover:bg-[#4E0B19]">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mensaje Privado -->
+          <div class="flex items-start gap-2.5 p-3 rounded-xl bg-[#FAF5F0] border border-[#ECDCD7]">
+            <input type="checkbox" id="private-checkbox" class="mt-0.5 h-4 w-4 rounded border-[#D1A397] text-[#7B0F2B] focus:ring-[#7B0F2B] cursor-pointer">
+            <label for="private-checkbox" class="text-xs text-[#321922] cursor-pointer select-none">
+              <span class="font-semibold text-[#4E0B19] flex items-center gap-1.5">
+                <svg class="w-3 h-3 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <span>Mensaje privado solo para los novios</span>
+              </span>
+              <span class="block text-[11px] text-[#6B4E56] mt-0.5">Los demás invitados no podrán leer tu texto ni oír tu audio; solo Lucio y Guadalupe Itzel podrán abrirlo con su clave.</span>
+            </label>
+          </div>
+
+          <button type="submit" id="submit-btn"
+                  class="w-full py-3 rounded-xl bg-[#7B0F2B] hover:bg-[#5C0A20] text-white font-semibold serif-title text-sm border border-[#E8CAC1] transition shadow-md flex items-center justify-center gap-2">
+            <span>Publicar Felicitación</span>
+            <svg class="w-4 h-4 text-[#F4EAE4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================== -->
+  <!-- MODAL: CÓDIGO QR                              -->
+  <!-- ============================================== -->
+  <div id="qrModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="floral-card rounded-2xl max-w-sm w-full p-6 text-center border border-[#ECDCD7] relative shadow-2xl">
+      <button onclick="closeModal('qrModal')" class="absolute top-3 right-3 text-[#6B4E56] hover:text-[#4E0B19] p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <h3 class="serif-title text-base font-bold text-[#4E0B19] mb-1">Código QR para Invitaciones</h3>
+      <p class="text-xs text-[#6B4E56] mb-4">Escanea con la cámara para abrir este libro de firmas.</p>
+      
+      <div class="bg-white p-4 rounded-xl mx-auto inline-block border border-[#ECDCD7] shadow-xs">
+        <img id="qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://skywalker002.github.io/recuerdos-boda/&color=7b-15-43"
+             alt="QR Code" class="w-48 h-48 mx-auto object-contain">
+      </div>
+      
+      <p class="text-[11px] text-[#7B0F2B] mt-3 break-all font-mono">https://skywalker002.github.io/recuerdos-boda/</p>
+      
+      <div class="mt-4 flex gap-2">
+        <button onclick="copyLink()" class="flex-1 py-2 px-3 rounded-lg bg-[#7B0F2B] text-xs font-semibold text-white hover:bg-[#5C0A20] transition">
+          Copiar Enlace
+        </button>
+        <button onclick="closeModal('qrModal')" class="py-2 px-3 rounded-lg bg-[#FAF5F0] text-xs font-semibold text-[#4E0B19] border border-[#ECDCD7] hover:bg-[#F3E8E3] transition">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: MENSAJE PARA WHATSAPP                  -->
+  <!-- ============================================== -->
+  <div id="whatsappTemplateModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="floral-card rounded-2xl max-w-md w-full p-6 text-left border border-[#CBD8BE] relative shadow-2xl">
+      <button onclick="closeModal('whatsappTemplateModal')" class="absolute top-3 right-3 text-[#6B4E56] hover:text-[#4E0B19] p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-7 h-7 rounded-full bg-[#5A6746] flex items-center justify-center text-white">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12.042 21.84a9.78 9.78 0 01-4.992-1.364l-.358-.213-3.712.973.99-3.618-.233-.371A9.8 9.8 0 012.25 12.04c0-5.414 4.406-9.82 9.82-9.82 2.624 0 5.09 1.023 6.947 2.88 1.856 1.857 2.879 4.323 2.879 6.947 0 5.414-4.434 9.793-9.854 9.793z"/></svg>
+        </div>
+        <h3 class="serif-title text-sm font-bold text-[#4E0B19]">Mensaje Listo para WhatsApp</h3>
+      </div>
+      <p class="text-xs text-[#6B4E56] mb-3">Puedes copiar este texto para enviarlo junto con tu invitación:</p>
+      
+      <div class="bg-[#FAF5F0] border border-[#CBD8BE] rounded-xl p-3.5 text-xs text-[#321922] leading-relaxed font-sans select-all whitespace-pre-line" id="whatsapp-text-block">¡Hola! Con mucha alegría te compartimos la invitación a nuestra boda. ✨
+
+Nos haría muy felices que nos dejes tus bendiciones, un recuerdo o una foto con nosotros en nuestro Libro de Recuerdos Digital:
+👉 https://skywalker002.github.io/recuerdos-boda/
+
+Con cariño,
+Lucio Alberto &amp; Guadalupe Itzel 💍</div>
+
+      <div class="mt-4 flex gap-2">
+        <button onclick="copyWhatsAppMessage()" class="flex-1 py-2 px-3 rounded-lg bg-[#5A6746] text-xs font-semibold text-white hover:bg-[#495438] transition flex items-center justify-center gap-1.5">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+          <span>Copiar Mensaje</span>
+        </button>
+        <button onclick="closeModal('whatsappTemplateModal')" class="py-2 px-3 rounded-lg bg-[#FAF5F0] text-xs text-[#6B4E56] border border-[#ECDCD7] hover:bg-[#F3E8E3] transition">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL: MODO NOVIOS (CLAVE 2026)               -->
+  <!-- ============================================== -->
+  <div id="noviosAuthModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs hidden flex items-center justify-center p-4">
+    <div class="floral-card rounded-2xl max-w-sm w-full p-6 text-center border border-[#ECDCD7] relative shadow-2xl">
+      <button onclick="closeModal('noviosAuthModal')" class="absolute top-3 right-3 text-[#6B4E56] hover:text-[#4E0B19] p-1">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <div class="w-10 h-10 rounded-full bg-[#FAF5F0] border border-[#E8CAC1] flex items-center justify-center mx-auto mb-2 text-[#7B0F2B]">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+      </div>
+      <h3 class="serif-title text-base font-bold text-[#4E0B19] mb-1">Acceso para los Novios</h3>
+      <p class="text-xs text-[#6B4E56] mb-3">Ingresa la clave para desbloquear dedicatorias y notas de voz confidenciales.</p>
+      
+      <input type="password" id="novios-pin" placeholder="Clave (por defecto: 2026)"
+             class="w-full bg-[#FAF5F0] border border-[#ECDCD7] rounded-xl px-3.5 py-2.5 text-center text-sm text-[#4E0B19] tracking-widest focus:outline-none focus:border-[#7B0F2B] mb-3">
+
+      <div class="flex gap-2">
+        <button onclick="verifyNoviosKey()" class="flex-1 py-2 px-3 rounded-lg bg-[#7B0F2B] text-xs font-semibold text-white hover:bg-[#5C0A20] transition">
+          Desbloquear
+        </button>
+        <button onclick="closeModal('noviosAuthModal')" class="py-2 px-3 rounded-lg bg-[#FAF5F0] text-xs text-[#6B4E56] border border-[#ECDCD7] hover:bg-[#F3E8E3] transition">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Foto Ampliada -->
+  <div id="photoModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeModal('photoModal')">
+    <div class="relative max-w-3xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeModal('photoModal')" class="absolute -top-10 right-0 text-white hover:text-[#D1A397] p-2 text-sm flex items-center gap-1">
+        <span>Cerrar</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <img id="modal-photo-img" src="" alt="Recuerdo ampliado" class="max-h-[80vh] w-auto rounded-xl border border-[#D1A397] shadow-2xl object-contain">
+      <span id="modal-photo-caption" class="text-xs text-[#FAF5F0] mt-2 font-medium"></span>
+    </div>
+  </div>
+
+  <!-- Toast Notificaciones -->
+  <div id="toast" class="fixed bottom-16 sm:bottom-6 right-4 sm:right-6 z-50 bg-white border border-[#E8CAC1] text-[#321922] px-4 py-3 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center gap-2 max-w-sm pointer-events-none">
+    <span id="toast-icon"></span>
+    <span id="toast-message" class="text-xs font-medium"></span>
+  </div>
+
+  <!-- Barra de navegación rápida inferior para celular -->
+  <div class="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-[#ECDCD7] px-4 py-2.5 z-40 flex items-center justify-around shadow-lg">
+    <button onclick="scrollToSection('form-section')" class="flex flex-col items-center text-xs text-[#7B0F2B] font-semibold">
+      <svg class="w-4 h-4 mb-0.5 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+      <span>Escribir</span>
+    </button>
+    <button onclick="scrollToSection('wall-section')" class="flex flex-col items-center text-xs text-[#6B4E56] font-medium">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+      <span>Recuerdos</span>
+    </button>
+    <button onclick="shareLink()" class="flex flex-col items-center text-xs text-[#6B4E56] font-medium">
+      <svg class="w-4 h-4 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+      <span>Compartir</span>
+    </button>
+  </div>
+
+  <script>
+    // Control de reproducción del archivo local musica.mp3
+    const weddingAudio = document.getElementById('wedding-audio');
+    let isMusicPlaying = false;
+
+    function playMusic() {
+      if (!weddingAudio) return;
+      weddingAudio.volume = 0.75;
+      const playPromise = weddingAudio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isMusicPlaying = true;
+          document.getElementById('music-icon-playing').classList.remove('hidden');
+          document.getElementById('music-icon-muted').classList.add('hidden');
+        }).catch(err => {
+          console.warn("El navegador solicitó interacción del usuario antes de reproducir audio:", err);
+          isMusicPlaying = false;
+          document.getElementById('music-icon-playing').classList.add('hidden');
+          document.getElementById('music-icon-muted').classList.remove('hidden');
+        });
+      }
+    }
+
+    function pauseMusic() {
+      if (!weddingAudio) return;
+      weddingAudio.pause();
+      isMusicPlaying = false;
+      document.getElementById('music-icon-playing').classList.add('hidden');
+      document.getElementById('music-icon-muted').classList.remove('hidden');
+    }
+
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        pauseMusic();
+        showToast("Música pausada", "sparkle");
+      } else {
+        playMusic();
+        showToast("Reproduciendo música", "check");
+      }
+    }
+
+    function openInvitation() {
+      const overlay = document.getElementById('envelope-overlay');
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+      }, 700);
+
+      // Lanzar confeti nupcial
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 75,
+          spread: 80,
+          origin: { y: 0.5 },
+          colors: ['#7B0F2B', '#4E0B19', '#5A6746', '#D1A397', '#FAF5F0']
+        });
+      }
+
+      // Arranca directamente su canción musica.mp3 al tocar el sobre
+      playMusic();
+    }
+
+    // Cuenta regresiva
+    function updateCountdown() {
+      const weddingDate = new Date("November 27, 2026 19:00:00").getTime();
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        setSafeText('cd-days', String(days).padStart(2, '0'));
+        setSafeText('cd-hours', String(hours).padStart(2, '0'));
+        setSafeText('cd-mins', String(mins).padStart(2, '0'));
+        setSafeText('cd-secs', String(secs).padStart(2, '0'));
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const INITIAL_MEMORIES = [
+      {
+        id: "mem-1",
+        author: "Tía Rosalba & Familia",
+        relation: "con-ambos",
+        message: "Qué felicidad tan inmensa verlos dar este paso tan sagrado. Que Dios y la Virgen bendigan su matrimonio todos los días.",
+        photo: "",
+        audio: "",
+        date: "Hace 1 día",
+        likes: 12,
+        isPrivate: false,
+        liked: false
+      },
+      {
+        id: "mem-2",
+        author: "Carlos Méndez (Amigo de Lucio)",
+        relation: "con-lucio",
+        message: "¡Hermano! Aún recuerdo cuando nos contabas de ella con una sonrisa de oreja a oreja. Te deseo lo mejor en esta nueva etapa, amigo.",
+        photo: "",
+        audio: "",
+        date: "Hace 2 días",
+        likes: 9,
+        isPrivate: false,
+        liked: false
+      },
+      {
+        id: "mem-3",
+        author: "Familia Matías",
+        relation: "con-itzel",
+        message: "Itzel hermosa, verte tan feliz nos llena el corazón de dicha. Siempre serás nuestro orgullo. ¡Felicidades a ambos!",
+        photo: "",
+        audio: "",
+        date: "Hace 3 días",
+        likes: 15,
+        isPrivate: false,
+        liked: false
+      }
+    ];
+
+    let memories = [];
+    let currentFilter = 'all';
+    let isNoviosAuthenticated = false;
+    let currentImageData = "";
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let audioBlob = null;
+    let audioBase64 = "";
+    let recordTimerInterval = null;
+    let recordSeconds = 0;
+
+    function loadMemories() {
+      try {
+        const stored = localStorage.getItem('boda_memories');
+        if (stored) {
+          memories = JSON.parse(stored);
+        } else {
+          memories = [...INITIAL_MEMORIES];
+          localStorage.setItem('boda_memories', JSON.stringify(memories));
+        }
+      } catch (e) {
+        memories = [...INITIAL_MEMORIES];
+      }
+    }
+
+    function saveMemories() {
+      try {
+        localStorage.setItem('boda_memories', JSON.stringify(memories));
+      } catch (e) {
+        console.warn("Storage quota exceeded", e);
+      }
+    }
+
+    function setSafeText(elementId, text) {
+      const el = document.getElementById(elementId);
+      if (el) el.innerText = text;
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function updateCounters() {
+      const total = memories.length;
+      const countAmbos = memories.filter(m => m.relation === 'con-ambos').length;
+      const countLucio = memories.filter(m => m.relation === 'con-lucio').length;
+      const countItzel = memories.filter(m => m.relation === 'con-itzel').length;
+
+      setSafeText('count-all', total);
+      setSafeText('count-ambos', countAmbos);
+      setSafeText('count-lucio', countLucio);
+      setSafeText('count-itzel', countItzel);
+    }
+
+    function renderMemories() {
+      const container = document.getElementById('memories-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      let filtered = memories;
+      if (currentFilter !== 'all') {
+        filtered = memories.filter(m => m.relation === currentFilter);
+      }
+
+      updateCounters();
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="floral-card rounded-2xl p-8 text-center border border-[#ECDCD7]">
+            <div class="w-12 h-12 rounded-full bg-[#FAF5F0] border border-[#D1A397] flex items-center justify-center mx-auto mb-2 text-[#7B0F2B]">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+            </div>
+            <p class="text-sm text-[#4E0B19] font-semibold">Aún no hay dedicatorias en esta categoría.</p>
+            <p class="text-xs text-[#6B4E56] mt-1">¡Sé el primero en dejar un recuerdo con los novios!</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const card = document.createElement('article');
+        card.className = "floral-card card-hover rounded-2xl p-5 transition-all duration-300";
+
+        let tagLabel = "Para Ambos";
+        let tagColor = "bg-[#FAF5F0] text-[#7B0F2B] border-[#ECDCD7]";
+        if (item.relation === 'con-lucio') {
+          tagLabel = "Con Lucio Alberto";
+          tagColor = "bg-[#F3F6EF] text-[#5A6746] border-[#CBD8BE]";
+        } else if (item.relation === 'con-itzel') {
+          tagLabel = "Con Guadalupe Itzel";
+          tagColor = "bg-[#FCF5F7] text-[#7B0F2B] border-[#F1D2DB]";
+        }
+
+        if (item.isPrivate && !isNoviosAuthenticated) {
+          card.innerHTML = `
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <h4 class="serif-title font-bold text-sm text-[#4E0B19]">${escapeHtml(item.author)}</h4>
+              <span class="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-0.5 rounded-full border border-[#D1A397] text-[#7B0F2B] bg-[#FAF5F0] flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                <span>Privado</span>
+              </span>
+            </div>
+            <div class="p-4 rounded-xl bg-[#FAF5F0] border border-[#ECDCD7] text-center my-2">
+              <div class="w-8 h-8 rounded-full bg-white border border-[#D1A397] flex items-center justify-center mx-auto mb-2 text-[#7B0F2B] shadow-2xs">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <p class="text-xs text-[#4E0B19] font-bold">Dedicatoria confidencial para los novios</p>
+              <p class="text-[11px] text-[#6B4E56] mt-0.5">Solo visible para Lucio &amp; Guadalupe Itzel</p>
+            </div>
+            <div class="pt-2 flex items-center justify-between text-[11px] text-[#6B4E56]">
+              <span>${item.date}</span>
+              <button onclick="openModal('noviosAuthModal')" class="text-xs font-bold text-[#7B0F2B] hover:underline">Desbloquear</button>
+            </div>
+          `;
+          container.appendChild(card);
+          return;
+        }
+
+        const photoHtml = item.photo ? `
+          <div class="mt-3 overflow-hidden rounded-xl border border-[#ECDCD7] max-h-80 cursor-pointer group" onclick="openPhotoModal('${item.photo}', '${escapeHtml(item.author)}')">
+            <img src="${item.photo}" alt="Recuerdo de ${escapeHtml(item.author)}" class="w-full h-56 sm:h-72 object-cover group-hover:scale-105 transition duration-500">
+          </div>
+        ` : '';
+
+        const audioHtml = item.audio ? `
+          <div class="mt-3 p-3 rounded-xl bg-[#FAF5F0] border border-[#ECDCD7]">
+            <span class="text-[11px] text-[#4E0B19] font-bold mb-1 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+              <span>Nota de voz adjunta</span>
+            </span>
+            <audio controls src="${item.audio}" class="w-full h-8 mt-1"></audio>
+          </div>
+        ` : '';
+
+        const privateBadge = item.isPrivate ? `
+          <span class="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full border border-[#D1A397] text-[#7B0F2B] bg-[#FAF5F0] flex items-center gap-1">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <span>Solo Novios</span>
+          </span>
+        ` : '';
+
+        const heartIcon = item.liked ? `
+          <svg class="w-4 h-4 fill-[#7B0F2B] stroke-[#7B0F2B]" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        ` : `
+          <svg class="w-4 h-4 fill-none stroke-[#7B0F2B]/60 group-hover:stroke-[#7B0F2B]" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+        `;
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3 mb-2">
+            <div>
+              <h4 class="serif-title font-bold text-sm text-[#4E0B19]">${escapeHtml(item.author)}</h4>
+              <span class="text-[11px] text-[#6B4E56]">${item.date}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              ${privateBadge}
+              <span class="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-0.5 rounded-full border ${tagColor}">
+                ${tagLabel}
+              </span>
+            </div>
+          </div>
+
+          ${item.message ? `
+            <p class="serif-body text-base text-[#321922] leading-relaxed italic mt-2 whitespace-pre-line">
+              “${escapeHtml(item.message)}”
+            </p>
+          ` : ''}
+
+          ${audioHtml}
+          ${photoHtml}
+
+          <div class="mt-4 pt-3 border-t border-[#ECDCD7] flex items-center justify-between">
+            <button onclick="toggleLike('${item.id}')" class="group flex items-center gap-1.5 text-xs ${item.liked ? 'text-[#7B0F2B] font-bold' : 'text-[#6B4E56] hover:text-[#7B0F2B]'} transition">
+              ${heartIcon}
+              <span>${item.likes} brindis</span>
+            </button>
+            <span class="text-[10px] text-[#6B4E56] font-medium">Boda Lucio &amp; Guadalupe Itzel</span>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function filterFeed(filter) {
+      currentFilter = filter;
+      const tabs = ['all', 'ambos', 'lucio', 'itzel'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (btn) {
+          if (t === filter || (filter === 'con-ambos' && t === 'ambos') || (filter === 'con-lucio' && t === 'lucio') || (filter === 'con-itzel' && t === 'itzel')) {
+            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#7B0F2B] text-white transition flex items-center gap-1.5 shadow-xs";
+          } else {
+            btn.className = "px-3 py-1.5 text-xs font-semibold rounded-lg text-[#6B4E56] hover:bg-[#FAF5F0] hover:text-[#4E0B19] transition flex items-center gap-1.5";
+          }
+        }
+      });
+
+      const labelMap = {
+        'all': 'Mostrando todos',
+        'con-ambos': 'Mostrando recuerdos para Ambos',
+        'con-lucio': 'Mostrando recuerdos con Lucio',
+        'con-itzel': 'Mostrando recuerdos con Itzel'
+      };
+      setSafeText('filter-status-text', labelMap[filter] || 'Mostrando todos');
+      renderMemories();
+    }
+
+    function toggleLike(id) {
+      const item = memories.find(m => m.id === id);
+      if (item) {
+        item.liked = !item.liked;
+        item.likes += item.liked ? 1 : -1;
+        saveMemories();
+        renderMemories();
+      }
+    }
+
+    async function toggleVoiceRecording() {
+      if (mediaRecorder && mediaRecorder.state === "recording") {
+        mediaRecorder.stop();
+        return;
+      }
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        showToast("Tu navegador no soporta grabación de voz directa.", "sparkle");
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream);
+
+        mediaRecorder.ondataavailable = (event) => {
+          if (event.data.size > 0) {
+            audioChunks.push(event.data);
+          }
+        };
+
+        mediaRecorder.onstop = () => {
+          audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+          const audioUrl = URL.createObjectURL(audioBlob);
+          const preview = document.getElementById('audio-preview');
+          preview.src = audioUrl;
+          preview.classList.remove('hidden');
+
+          const reader = new FileReader();
+          reader.readAsDataURL(audioBlob);
+          reader.onloadend = () => {
+            audioBase64 = reader.result;
+          };
+
+          clearInterval(recordTimerInterval);
+          document.getElementById('record-text').innerText = "Volver a grabar audio";
+          document.getElementById('record-indicator').classList.remove('pulse-record', 'bg-red-500');
+          document.getElementById('record-indicator').classList.add('bg-[#7B0F2B]');
+          document.getElementById('discard-audio-btn').classList.remove('hidden');
+          showToast("¡Nota de voz grabada con éxito!", "check");
+        };
+
+        mediaRecorder.start();
+        recordSeconds = 0;
+        document.getElementById('record-text').innerText = "Grabando... Toca para detener";
+        document.getElementById('record-indicator').classList.add('pulse-record', 'bg-red-500');
+        document.getElementById('discard-audio-btn').classList.add('hidden');
+
+        recordTimerInterval = setInterval(() => {
+          recordSeconds++;
+          const mins = String(Math.floor(recordSeconds / 60)).padStart(2, '0');
+          const secs = String(recordSeconds % 60).padStart(2, '0');
+          document.getElementById('voice-timer').innerText = `${mins}:${secs}`;
+          if (recordSeconds >= 120) {
+            mediaRecorder.stop();
+          }
+        }, 1000);
+
+      } catch (err) {
+        console.error("Mic access error:", err);
+        showToast("Por favor concede permiso de micrófono en tu navegador.", "sparkle");
+      }
+    }
+
+    function discardRecordedAudio() {
+      audioBlob = null;
+      audioBase64 = "";
+      audioChunks = [];
+      const preview = document.getElementById('audio-preview');
+      preview.src = "";
+      preview.classList.add('hidden');
+      document.getElementById('discard-audio-btn').classList.add('hidden');
+      document.getElementById('record-text').innerText = "Grabar nota de voz";
+      document.getElementById('voice-timer').innerText = "00:00";
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        currentImageData = e.target.result;
+        document.getElementById('preview-img').src = currentImageData;
+        document.getElementById('upload-placeholder').classList.add('hidden');
+        document.getElementById('upload-preview').classList.remove('hidden');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage(event) {
+      if (event) event.stopPropagation();
+      currentImageData = "";
+      document.getElementById('photo-input').value = "";
+      document.getElementById('upload-preview').classList.add('hidden');
+      document.getElementById('upload-placeholder').classList.remove('hidden');
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('guest-name').value.trim();
+      const message = document.getElementById('guest-message').value.trim();
+      const relation = document.getElementById('relation-tag').value;
+      const isPrivate = document.getElementById('private-checkbox').checked;
+
+      if (!message && !currentImageData && !audioBase64) {
+        showToast("Escribe un mensaje, sube una foto o graba una nota de voz.", "sparkle");
+        return;
+      }
+
+      const newMemory = {
+        id: "mem-" + Date.now(),
+        author: name,
+        relation: relation,
+        message: message,
+        photo: currentImageData,
+        audio: audioBase64,
+        date: "Justo ahora",
+        likes: 1,
+        isPrivate: isPrivate,
+        liked: true
+      };
+
+      memories.unshift(newMemory);
+      saveMemories();
+      renderMemories();
+
+      // Limpieza del formulario
+      document.getElementById('guest-name').value = '';
+      document.getElementById('guest-message').value = '';
+      document.getElementById('private-checkbox').checked = false;
+      removeImage(null);
+      discardRecordedAudio();
+
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#7B0F2B', '#4E0B19', '#5A6746', '#D1A397', '#FAF5F0']
+        });
+      }
+
+      showToast("¡Gracias por tus buenos deseos!", "check");
+      scrollToSection('wall-section');
+    }
+
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function openPhotoModal(imgSrc, caption) {
+      document.getElementById('modal-photo-img').src = imgSrc;
+      document.getElementById('modal-photo-caption').innerText = "Foto compartida por " + caption;
+      openModal('photoModal');
+    }
+
+    function verifyNoviosKey() {
+      const pin = document.getElementById('novios-pin').value.trim();
+      if (pin === '2026') {
+        isNoviosAuthenticated = true;
+        closeModal('noviosAuthModal');
+        setSafeText('novios-status-text', 'Modo Novios (Activo)');
+        showToast("¡Modo Novios activado! Mensajes privados desbloqueados.", "lock");
+        renderMemories();
+      } else {
+        showToast("Clave incorrecta. Por favor intenta de nuevo.", "lock");
+      }
+    }
+
+    function copyLink() {
+      const url = "https://skywalker002.github.io/recuerdos-boda/";
+      copyToClipboard(url);
+      showToast("Enlace copiado al portapapeles.", "check");
+    }
+
+    function copyWhatsAppMessage() {
+      const textBlock = document.getElementById('whatsapp-text-block');
+      if (textBlock) {
+        copyToClipboard(textBlock.innerText);
+        showToast("Texto para WhatsApp copiado.", "check");
+      }
+    }
+
+    function copyToClipboard(text) {
+      const dummy = document.createElement("textarea");
+      document.body.appendChild(dummy);
+      dummy.value = text;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    }
+
+    function shareLink() {
+      const shareData = {
+        title: 'Boda Lucio Alberto & Guadalupe Itzel',
+        text: '¡Déjanos tus bendiciones y recuerdos para nuestro gran día!',
+        url: 'https://skywalker002.github.io/recuerdos-boda/'
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch(() => {});
+      } else {
+        copyLink();
+      }
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function showToast(message, iconType) {
+      const toast = document.getElementById('toast');
+      const iconContainer = document.getElementById('toast-icon');
+      const msgContainer = document.getElementById('toast-message');
+
+      if (!toast || !iconContainer || !msgContainer) return;
+
+      msgContainer.innerText = message;
+
+      if (iconType === "check") {
+        iconContainer.innerHTML = `<svg class="w-4 h-4 text-[#5A6746]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`;
+      } else if (iconType === "lock") {
+        iconContainer.innerHTML = `<svg class="w-4 h-4 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>`;
+      } else {
+        iconContainer.innerHTML = `<svg class="w-4 h-4 text-[#D1A397]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>`;
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadMemories();
+      renderMemories();
+    });
+  </script>
+</body>
+</html>
