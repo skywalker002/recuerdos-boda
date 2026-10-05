@@ -493,13 +493,13 @@
                 <svg class="w-3 h-3 text-[#7B0F2B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
                 <span>Mensaje privado solo para los novios</span>
               </span>
-              <span class="block text-[11px] text-[#6B4E56] mt-0.5">Los demás invitados no podrán leer tu texto ni oír tu audio; solo Lucio y Guadalupe Itzel podrán abrirlo con su clave.</span>
+              <span class="block text-[11px] text-[#6B4E56] mt-0.5">Solo los novios lo verán; no se mostrará en el muro.</span>
             </label>
           </div>
 
           <button type="submit" id="submit-btn"
                   class="w-full py-3 rounded-xl bg-[#7B0F2B] hover:bg-[#5C0A20] text-white font-semibold serif-title text-sm border border-[#E8CAC1] transition shadow-md flex items-center justify-center gap-2">
-            <span>Publicar Felicitación</span>
+            <span>Enviar felicitación</span>
             <svg class="w-4 h-4 text-[#F4EAE4]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
           </button>
         </form>
@@ -731,27 +731,23 @@ Lucio Alberto &amp; Guadalupe Itzel 💍</div>
     let recordTimerInterval = null;
     let recordSeconds = 0;
 
-    function loadMemories() {
+    async function loadMemories() {
+      memories = [];
+      if (!SHEETS_URL) return;
       try {
-        const stored = localStorage.getItem('boda_memories');
-        if (stored) {
-          memories = JSON.parse(stored);
-        } else {
-          memories = [...INITIAL_MEMORIES];
-          localStorage.setItem('boda_memories', JSON.stringify(memories));
-        }
-      } catch (e) {
-        memories = [...INITIAL_MEMORIES];
-      }
+        const r = await (await fetch(SHEETS_URL)).json();
+        memories = (r.items || []).map(i => ({ id: 'm' + i.id, author: i.nombre, relation: i.para, message: i.texto, photo: '', audio: '', fotoId: i.foto, audioId: i.audio, date: i.fecha, likes: 0, isPrivate: false, liked: false }));
+      } catch (e) { console.warn(e); }
     }
 
-    function saveMemories() {
-      try {
-        localStorage.setItem('boda_memories', JSON.stringify(memories));
-      } catch (e) {
-        console.warn("Storage quota exceeded", e);
-      }
+    async function loadMedia() {
+      await Promise.all(memories.flatMap(m => [['photo', m.fotoId], ['audio', m.audioId]].filter(x => x[1]).map(async ([k, id]) => {
+        try { const r = await (await fetch(SHEETS_URL + '?media=' + id)).json(); if (r.data) m[k] = r.data; } catch (e) {}
+      })));
+      renderMemories();
     }
+
+    function saveMemories() {}
 
     function setSafeText(elementId, text) {
       const el = document.getElementById(elementId);
@@ -898,10 +894,6 @@ Lucio Alberto &amp; Guadalupe Itzel 💍</div>
           ${photoHtml}
 
           <div class="mt-4 pt-3 border-t border-[#ECDCD7] flex items-center justify-between">
-            <button onclick="toggleLike('${item.id}')" class="group flex items-center gap-1.5 text-xs ${item.liked ? 'text-[#7B0F2B] font-bold' : 'text-[#6B4E56] hover:text-[#7B0F2B]'} transition">
-              ${heartIcon}
-              <span>${item.likes} brindis</span>
-            </button>
             <span class="text-[10px] text-[#6B4E56] font-medium">Boda Lucio &amp; Guadalupe Itzel</span>
           </div>
         `;
@@ -1051,7 +1043,7 @@ Lucio Alberto &amp; Guadalupe Itzel 💍</div>
       document.getElementById('upload-placeholder').classList.remove('hidden');
     }
 
-    function handleFormSubmit(event) {
+    async function handleFormSubmit(event) {
       event.preventDefault();
       const name = document.getElementById('guest-name').value.trim();
       const message = document.getElementById('guest-message').value.trim();
@@ -1063,23 +1055,11 @@ Lucio Alberto &amp; Guadalupe Itzel 💍</div>
         return;
       }
 
-      const newMemory = {
-        id: "mem-" + Date.now(),
-        author: name,
-        relation: relation,
-        message: message,
-        photo: currentImageData,
-        audio: audioBase64,
-        date: "Justo ahora",
-        likes: 1,
-        isPrivate: isPrivate,
-        liked: true
-      };
-
-      memories.unshift(newMemory);
-      sendToSheet({ tipo: 'mensaje', nombre: name, para: relation, privado: isPrivate, texto: message, foto: currentImageData, audio: audioBase64 });
-      saveMemories();
-      renderMemories();
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      const r = await sendToSheet({ tipo: 'mensaje', nombre: name, para: relation, privado: isPrivate, texto: message, foto: currentImageData, audio: audioBase64 });
+      btn.disabled = false;
+      if (!r.ok) { showToast("No se pudo enviar. Intenta de nuevo en un momento.", "sparkle"); return; }
 
       // Limpieza del formulario
       document.getElementById('guest-name').value = '';
@@ -1097,33 +1077,35 @@ Lucio Alberto &amp; Guadalupe Itzel 💍</div>
         });
       }
 
-      showToast("¡Gracias por tus buenos deseos!", "check");
-      scrollToSection('wall-section');
+      showToast("¡Gracias! Tu mensaje llegó a los novios.", "check");
     }
 
     // Pega aquí la URL de tu Apps Script (ver apps_script.gs)
-    const SHEETS_URL = "https://script.google.com/macros/s/AKfycbxutkUj_M5K2UVXuMCh8vjxwog9usy_PWyb2fVVU_AVxCTNfZlQWGf3SzAi0zpGqo6V/exec";
+    const SHEETS_URL = "";
 
     async function sendToSheet(data) {
-      if (!SHEETS_URL) { console.warn("Falta SHEETS_URL: no se envió a la hoja."); return false; }
+      if (!SHEETS_URL) return { ok: false };
       try {
-        await fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-        return true;
-      } catch (e) { console.error(e); return false; }
+        const res = await fetch(SHEETS_URL, { method: 'POST', body: JSON.stringify(data) });
+        return await res.json();
+      } catch (e) { console.error(e); return { ok: false }; }
     }
 
     async function handleRsvp(event) {
       event.preventDefault();
+      const btn = event.target.querySelector('button[type=submit]');
+      btn.disabled = true;
       const count = document.getElementById('rsvp-count').value;
-      const ok = await sendToSheet({
+      const r = await sendToSheet({
         tipo: 'rsvp',
         nombre: document.getElementById('rsvp-name').value.trim(),
         asistentes: count,
         mensaje: document.getElementById('rsvp-msg').value.trim()
       });
-      if (!ok) { showToast("No se pudo enviar. Intenta de nuevo en un momento.", "sparkle"); return; }
+      btn.disabled = false;
+      if (!r.ok) { showToast("No se pudo enviar. Intenta de nuevo en un momento.", "sparkle"); return; }
       event.target.reset();
-      showToast(count === '0' ? "Gracias por avisarnos. ¡Te vamos a extrañar!" : "¡Asistencia confirmada! Gracias.", "check");
+      showToast(r.updated ? "Actualizamos tu respuesta. ¡Gracias!" : (count === '0' ? "Gracias por avisarnos. ¡Te vamos a extrañar!" : "¡Asistencia confirmada! Gracias."), "check");
       if (count !== '0' && typeof confetti === 'function') confetti({ particleCount: 60, spread: 70, origin: { y: 0.7 } });
     }
 
@@ -1224,8 +1206,7 @@ Lucio Alberto &amp; Guadalupe Itzel 💍</div>
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      loadMemories();
-      renderMemories();
+      loadMemories().then(() => { renderMemories(); loadMedia(); });
     });
   </script>
 </body>
